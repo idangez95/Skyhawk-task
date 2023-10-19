@@ -9,6 +9,14 @@ const StyledTextField = styled(TextField)({
 });
 
 const InputField = ({ name, value, onChangehandler, error, disabled, placeholder }) => {
+  // const validateName = (name) => {
+  //   const isValid = /^[a-zA-Z]*$/.test(name);
+  //   console.log(`Name: ${name}, Valid: ${isValid}`);
+  //   return isValid;
+  // };
+
+  // validateName(value);
+
   return (
     <StyledTextField
       name={name}

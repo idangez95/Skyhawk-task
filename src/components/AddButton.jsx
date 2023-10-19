@@ -21,10 +21,4 @@ const AddButton = ({ disabled, handleClick }) => {
   );
 };
 
-// TODO: Implement passed props
-AddButton.defaultProps = {
-  disabled: false,
-  handleClick: () => {},
-};
-
 export default AddButton;
