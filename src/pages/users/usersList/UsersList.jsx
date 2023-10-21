@@ -8,6 +8,7 @@ import { usersDataState } from '../../../state/atoms/userDataState';
 import initialUsersData from '../../../data/initialUsersData.json';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { ErrorsCounter } from '../errorsCounter/ErrorsCounter';
 
 function UsersList() {
   const [usersData, setUsersData] = useRecoilState(usersDataState);
@@ -38,7 +39,7 @@ function UsersList() {
     setUsersData((prevUsersData) => [newUser, ...prevUsersData]);
   };
 
-  console.log({ usersData });
+  console.log(errorsCounter);
 
   return (
     <div className={styles.usersList}>
@@ -48,9 +49,10 @@ function UsersList() {
       </div>
       <div className={styles.usersListContent}>
         {usersData.map((user) => (
-          <UserRow key={user.id} user={user} />
+          <UserRow key={user.id} user={user} setErrorsCounter={setErrorsCounter} />
         ))}
       </div>
+      <ErrorsCounter errors={errorsCounter} />
     </div>
   );
 }

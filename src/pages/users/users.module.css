@@ -51,3 +51,7 @@
 .userRowInput {
   flex-basis: 22.5%;
 }
+
+.errorsCounter {
+  margin-top: 10%;
+}

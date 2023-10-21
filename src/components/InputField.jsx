@@ -8,20 +8,12 @@ const StyledTextField = styled(TextField)({
   borderRadius: '4px',
 });
 
-const InputField = ({ name, value, onChangehandler, error, disabled, placeholder }) => {
-  // const validateName = (name) => {
-  //   const isValid = /^[a-zA-Z]*$/.test(name);
-  //   console.log(`Name: ${name}, Valid: ${isValid}`);
-  //   return isValid;
-  // };
-
-  // validateName(value);
-
+const InputField = ({ name, value, onChange, error, disabled, placeholder }) => {
   return (
     <StyledTextField
       name={name}
       value={value}
-      onChange={(e) => onChangehandler(e.target.name, e.target.value)}
+      onChange={onChange} // Use the provided onChange prop
       error={error}
       disabled={disabled}
       placeholder={placeholder}
@@ -34,16 +26,6 @@ const InputField = ({ name, value, onChangehandler, error, disabled, placeholder
       }}
     />
   );
-};
-
-// TODO: Implement passed props
-InputField.defaultProps = {
-  name: 'text_field_name',
-  value: '',
-  onChangehandler: () => {},
-  error: false,
-  disabled: false,
-  placeholder: '',
 };
 
 export default InputField;
