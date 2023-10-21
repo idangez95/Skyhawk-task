@@ -39,10 +39,7 @@ const UserRow = ({ user, onDeleteUser }) => {
   };
 
   return (
-    <Formik
-      initialValues={localUser}
-      validationSchema={validationSchema}
-    >
+    <Formik initialValues={localUser} validationSchema={validationSchema}>
       {({ errors, values, handleChange, handleBlur }) => (
         <Form>
           <Grid container className={styles.userRow}>
@@ -94,7 +91,7 @@ const UserRow = ({ user, onDeleteUser }) => {
               error={!!errors.phone}
             />
 
-            <TrashIconButton handleClick={onDeleteUser} />
+            <TrashIconButton handleClick={() => onDeleteUser(user.id)} />
           </Grid>
         </Form>
       )}
