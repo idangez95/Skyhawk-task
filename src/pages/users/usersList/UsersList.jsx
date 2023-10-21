@@ -4,24 +4,11 @@ import AddButton from '../../../components/AddButton';
 import styles from '../users.module.css';
 import { useRecoilState } from 'recoil';
 import { errorsState } from '../../../state/atoms/errorsState';
-import { usersDataState } from '../../../state/atoms/userDataState';
-import initialUsersData from '../../../data/initialUsersData.json';
-import { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { ErrorsCounter } from '../errorsCounter/ErrorsCounter';
 
-function UsersList() {
-  const [usersData, setUsersData] = useRecoilState(usersDataState);
+function UsersList({ setIsValidRow, usersData, tempUsersData, setTempUsersData }) {
   const [errorsCounter, setErrorsCounter] = useRecoilState(errorsState);
-
-  useEffect(() => {
-    // Simulate data loading
-    const loadData = async () => {
-      // You can load data from an API here if needed
-      setUsersData(initialUsersData);
-    };
-    loadData();
-  }, [setUsersData]);
 
   const addNewUser = () => {
     const newUserId = uuidv4();
@@ -36,12 +23,12 @@ function UsersList() {
     };
 
     // Update the state using the updater function
-    setUsersData((prevUsersData) => [newUser, ...prevUsersData]);
+    setTempUsersData((prevUsersData) => [newUser, ...prevUsersData]);
   };
 
   const deleteUser = (id) => {
-    const updatedUsersList = usersData.filter((user) => user.id !== id);
-    setUsersData(updatedUsersList);
+    const updatedUsersList = tempUsersData.filter((user) => user.id !== id);
+    setTempUsersData(updatedUsersList);
   };
 
   return (
@@ -51,12 +38,15 @@ function UsersList() {
         <AddButton handleClick={addNewUser} />
       </div>
       <div className={styles.usersListContent}>
-        {usersData.map((user) => (
+        {tempUsersData.map((user) => (
           <UserRow
             key={user.id}
             user={user}
             setErrorsCounter={setErrorsCounter}
             onDeleteUser={() => deleteUser(user.id)}
+            setIsValidRow={setIsValidRow}
+            tempUsersData={tempUsersData}
+            setTempUsersData={setTempUsersData}
           />
         ))}
       </div>

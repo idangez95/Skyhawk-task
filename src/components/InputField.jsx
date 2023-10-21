@@ -8,9 +8,10 @@ const StyledTextField = styled(TextField)({
   borderRadius: '4px',
 });
 
-const InputField = ({ name, value, onChange, error, disabled, placeholder }) => {
+const InputField = ({ name, value, onChange, error, disabled, placeholder, onBlur }) => {
   return (
     <StyledTextField
+      onBlur={onBlur}
       name={name}
       value={value}
       onChange={onChange} // Use the provided onChange prop

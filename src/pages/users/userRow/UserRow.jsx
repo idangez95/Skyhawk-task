@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
-import { Formik, Form } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import InputField from '../../../components/InputField';
 import TrashIconButton from '../../../components/TrashIconButton';
 import styles from '../users.module.css';
 import countryOptions from '../../../data/countries.json';
-import { useSetRecoilState } from 'recoil';
-import { errorsState } from '../../../state/atoms/errorsState';
 
 const validateName = (name) => /^[a-zA-Z\s]*$/.test(name) && name.trim() !== '';
 const validateCountry = (country) => countryOptions.includes(country);
@@ -29,73 +27,86 @@ const validationSchema = Yup.object().shape({
     .required('Phone is required'),
 });
 
-const UserRow = ({ user, onDeleteUser }) => {
+const UserRow = ({
+  user,
+  tempUsersData,
+  setTempUsersData,
+  onDeleteUser,
+  setIsValidRow,
+}) => {
   const [localUser, setLocalUser] = useState(user);
-  const setErrorsCounter = useSetRecoilState(errorsState);
 
   const handleInputChange = (field, value) => {
     const updatedUser = { ...localUser, [field]: value };
     setLocalUser(updatedUser);
+
+    const updatedTempUsersData = tempUsersData.map((tempUser) =>
+      tempUser.id === localUser.id ? updatedUser : tempUser
+    );
+    setTempUsersData(updatedTempUsersData);
   };
 
+  const { errors, values, handleChange, handleBlur, isValid } = useFormik({
+    initialValues: localUser,
+    validationSchema: validationSchema,
+  });
+
+  useEffect(() => {
+    setIsValidRow(isValid);
+  }, [isValid, setIsValidRow]);
+
   return (
-    <Formik initialValues={localUser} validationSchema={validationSchema}>
-      {({ errors, values, handleChange, handleBlur }) => (
-        <Form>
-          <Grid container className={styles.userRow}>
-            <InputField
-              name="name"
-              placeholder="Name"
-              value={values.name}
-              onChange={(e) => {
-                handleChange(e);
-                handleInputChange(e.target.name, e.target.value);
-              }}
-              onBlur={handleBlur}
-              error={!!errors.name}
-            />
+    <Grid container className={styles.userRow}>
+      <InputField
+        name="name"
+        placeholder="Name"
+        value={values.name}
+        onChange={(e) => {
+          handleChange(e);
+          handleInputChange(e.target.name, e.target.value);
+        }}
+        onBlur={handleBlur}
+        error={!!errors.name}
+      />
 
-            <InputField
-              name="country"
-              placeholder="Country"
-              value={values.country}
-              onChange={(e) => {
-                handleChange(e);
-                handleInputChange(e.target.name, e.target.value);
-              }}
-              onBlur={handleBlur}
-              error={!!errors.country}
-            />
+      <InputField
+        name="country"
+        placeholder="Country"
+        value={values.country}
+        onChange={(e) => {
+          handleChange(e);
+          handleInputChange(e.target.name, e.target.value);
+        }}
+        onBlur={handleBlur}
+        error={!!errors.country}
+      />
 
-            <InputField
-              name="email"
-              placeholder="Email"
-              value={values.email}
-              onChange={(e) => {
-                handleChange(e);
-                handleInputChange(e.target.name, e.target.value);
-              }}
-              onBlur={handleBlur}
-              error={!!errors.email}
-            />
+      <InputField
+        name="email"
+        placeholder="Email"
+        value={values.email}
+        onChange={(e) => {
+          handleChange(e);
+          handleInputChange(e.target.name, e.target.value);
+        }}
+        onBlur={handleBlur}
+        error={!!errors.email}
+      />
 
-            <InputField
-              name="phone"
-              placeholder="Phone"
-              value={values.phone}
-              onChange={(e) => {
-                handleChange(e);
-                handleInputChange(e.target.name, e.target.value);
-              }}
-              onBlur={handleBlur}
-              error={!!errors.phone}
-            />
+      <InputField
+        name="phone"
+        placeholder="Phone"
+        value={values.phone}
+        onChange={(e) => {
+          handleChange(e);
+          handleInputChange(e.target.name, e.target.value);
+        }}
+        onBlur={handleBlur}
+        error={!!errors.phone}
+      />
 
-            <TrashIconButton handleClick={() => onDeleteUser(user.id)} />
-          </Grid>
-        </Form>
-      )}
-    </Formik>
+      <TrashIconButton handleClick={() => onDeleteUser(user.id)} />
+    </Grid>
   );
 };
 
