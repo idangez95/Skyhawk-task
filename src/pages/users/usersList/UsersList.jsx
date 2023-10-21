@@ -1,4 +1,4 @@
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import UserRow from '../userRow/UserRow';
 import AddButton from '../../../components/AddButton';
 import styles from '../users.module.css';
@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil';
 import { errorsState } from '../../../state/atoms/errorsState';
 import { usersDataState } from '../../../state/atoms/userDataState';
 import initialUsersData from '../../../data/initialUsersData.json';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { ErrorsCounter } from '../errorsCounter/ErrorsCounter';
 
@@ -39,7 +39,10 @@ function UsersList() {
     setUsersData((prevUsersData) => [newUser, ...prevUsersData]);
   };
 
-  console.log(errorsCounter);
+  const deleteUser = (id) => {
+    const updatedUsersList = usersData.filter((user) => user.id !== id);
+    setUsersData(updatedUsersList);
+  };
 
   return (
     <div className={styles.usersList}>
@@ -49,7 +52,12 @@ function UsersList() {
       </div>
       <div className={styles.usersListContent}>
         {usersData.map((user) => (
-          <UserRow key={user.id} user={user} setErrorsCounter={setErrorsCounter} />
+          <UserRow
+            key={user.id}
+            user={user}
+            setErrorsCounter={setErrorsCounter}
+            onDeleteUser={() => deleteUser(user.id)}
+          />
         ))}
       </div>
       <ErrorsCounter errors={errorsCounter} />
