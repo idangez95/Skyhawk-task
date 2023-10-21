@@ -4,3 +4,7 @@
   padding: 30px;
   height: calc(100vh - 150px);
 }
+
+.pageHeader {
+  text-align: center;
+}
