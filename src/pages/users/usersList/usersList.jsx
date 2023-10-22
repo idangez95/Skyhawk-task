@@ -4,8 +4,8 @@ import AddButton from '../../../components/addButton';
 import styles from '../users.module.css';
 import { ErrorsCounter } from '../errorsCounter/errorsCounter';
 import { v4 as uuidv4 } from 'uuid';
-import { useRecoilState } from 'recoil';
-import { errorsState } from '../../../state/atoms/errorsState';
+import InputField from '../../../components/inputField';
+import { useState } from 'react';
 
 export const UsersList = ({
   setIsValidRow,
@@ -13,7 +13,7 @@ export const UsersList = ({
   tempUsersData,
   setTempUsersData,
 }) => {
-  const [errorsCounter, setErrorsCounter] = useRecoilState(errorsState);
+  const [filterText, setFilterText] = useState('');
 
   const addNewUser = () => {
     const newUserId = uuidv4();
@@ -36,14 +36,34 @@ export const UsersList = ({
 
   console.log(tempUsersData);
 
+  const filteredUsers = tempUsersData.filter((user) => {
+    const lowerCaseFilterText = filterText.toLowerCase();
+    return (
+      user.name.toLowerCase().includes(lowerCaseFilterText) ||
+      user.country.toLowerCase().includes(lowerCaseFilterText) ||
+      user.email.toLowerCase().includes(lowerCaseFilterText) ||
+      user.phone.toLowerCase().includes(lowerCaseFilterText)
+    );
+  });
+
   return (
     <div className={styles.usersList}>
       <div className={styles.usersListHeader}>
         <Typography variant="h6">Users List ({usersData.length})</Typography>
-        <AddButton handleClick={addNewUser} />
+        <div className={styles.searchAndAddButton}>
+          {/* <div style={{ marginLeft: '400px' }}> */}
+          <InputField
+            type="text"
+            placeholder="Filter users by name"
+            value={filterText}
+            onChange={(e) => setFilterText(e.target.value)}
+          />
+          {/* </div> */}
+          <AddButton handleClick={addNewUser} />
+        </div>
       </div>
       <div className={styles.usersListContent}>
-        {tempUsersData.map((user) => (
+        {filteredUsers.map((user) => (
           <UserRow
             key={user.id}
             user={user}

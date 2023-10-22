@@ -24,6 +24,6 @@ export const useUsersPageServices = () => {
         saveUsers,
         usersData,
         tempUsersData,
-        setTempUsersData
+        setTempUsersData,
     }
 }

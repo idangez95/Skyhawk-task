@@ -6,6 +6,7 @@ const StyledTextField = styled(TextField)({
   textTransform: 'none',
   backgroundColor: '#909196',
   borderRadius: '4px',
+  width: '180px',
 });
 
 const InputField = ({ name, value, onChange, error, disabled, placeholder, onBlur }) => {
@@ -14,13 +15,12 @@ const InputField = ({ name, value, onChange, error, disabled, placeholder, onBlu
       onBlur={onBlur}
       name={name}
       value={value}
-      onChange={onChange} // Use the provided onChange prop
+      onChange={onChange}
       error={error}
       disabled={disabled}
       placeholder={placeholder}
       variant="outlined"
       size="small"
-      fullWidth
       autoComplete="off"
       inputProps={{
         autoComplete: 'off',

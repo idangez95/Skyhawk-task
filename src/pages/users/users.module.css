@@ -35,6 +35,13 @@
   background-color: #1f2a62;
 }
 
+.searchAndAddButton{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 35%;
+}
+
 .usersListContent {
   overflow: auto;
   height: calc(100% - 96px);
