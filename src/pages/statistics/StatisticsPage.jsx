@@ -1,16 +1,12 @@
-import { useRecoilValue } from 'recoil';
 import styles from './statistics.module.css';
 import Chart from 'chart.js/auto';
-import { usersDataState } from '../../state/atoms/userDataState';
 import { Pie } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
-import { useState, useEffect } from 'react';
-import { generateRandomColors, quantifyPeopleByCountry } from './utils'; // Import utility functions from utils.js
 import { useStatisticsPageServices } from './statisticsPage.services';
 
 Chart.register(CategoryScale);
 
-const StatisticsPage = () => {
+export const StatisticsPage = () => {
   const { chartData } = useStatisticsPageServices();
 
   return (
@@ -32,11 +28,3 @@ const StatisticsPage = () => {
     </div>
   );
 };
-
-export default StatisticsPage;
-
-// legend: {
-//   labels: {
-//     fontSize: 50,
-//   },
-// },
