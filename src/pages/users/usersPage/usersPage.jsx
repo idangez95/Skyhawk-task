@@ -1,4 +1,4 @@
-import { UsersList } from '../usersList/usersList';
+import { UsersList } from '../usersList/UsersList';
 import PrimaryButton from '../../../components/primaryButton';
 import styles from '../../users/users.module.css';
 import { useUsersPageServices } from './usersPage.services';
