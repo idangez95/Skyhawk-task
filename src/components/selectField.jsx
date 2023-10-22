@@ -38,5 +38,3 @@ export const SelectField = ({ name, value, onChange, error, placeholder, options
     </StyledFormControl>
   );
 };
-
-export default SelectField;

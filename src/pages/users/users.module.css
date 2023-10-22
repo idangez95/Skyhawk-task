@@ -7,7 +7,6 @@
 
 .pageContentContainer {
   width: 890px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,13 +14,16 @@
 }
 
 .rightButtonContainer {
-  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .usersList {
   border: 1px solid #ccc;
   border-radius: 4px;
-  height: 500px;
+  height: 80vh;
   width: 100%;
 }
 
@@ -35,7 +37,7 @@
   background-color: #1f2a62;
 }
 
-.searchAndAddButton{
+.searchAndAddButton {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -57,8 +59,4 @@
 
 .userRowInput {
   flex-basis: 22.5%;
-}
-
-.errorsCounter {
-  margin-top: 10%;
 }

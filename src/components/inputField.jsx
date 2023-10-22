@@ -9,7 +9,7 @@ const StyledTextField = styled(TextField)({
   width: '180px',
 });
 
-const InputField = ({ name, value, onChange, error, disabled, placeholder, onBlur }) => {
+export const InputField = ({ name, value, onChange, error, disabled, placeholder, onBlur }) => {
   return (
     <StyledTextField
       onBlur={onBlur}
@@ -28,5 +28,3 @@ const InputField = ({ name, value, onChange, error, disabled, placeholder, onBlu
     />
   );
 };
-
-export default InputField;

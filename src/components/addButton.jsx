@@ -13,12 +13,10 @@ const StyledAddButton = styled(Button)({
   },
 });
 
-const AddButton = ({ disabled, handleClick }) => {
+export const AddButton = ({ disabled, handleClick }) => {
   return (
     <StyledAddButton variant="contained" disabled={disabled} onClick={handleClick}>
       <AddIcon fontSize="inherit" />
     </StyledAddButton>
   );
 };
-
-export default AddButton;

@@ -9,12 +9,10 @@ const StyledIconButton = styled(IconButton)({
   },
 });
 
-const TrashIconButton = ({ handleClick }) => {
+export const TrashIconButton = ({ handleClick }) => {
   return (
     <StyledIconButton aria-label="delete" size="large" onClick={handleClick}>
       <DeleteIcon fontSize="inherit" />
     </StyledIconButton>
   );
 };
-
-export default TrashIconButton;
