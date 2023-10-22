@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useRecoilState } from 'recoil';
 import { errorsState } from '../../../state/atoms/errorsState';
 
-const UsersList = ({ setIsValidRow, usersData, tempUsersData, setTempUsersData }) => {
+export const UsersList = ({ setIsValidRow, usersData, tempUsersData, setTempUsersData }) => {
   const [errorsCounter, setErrorsCounter] = useRecoilState(errorsState);
 
   const addNewUser = () => {
@@ -54,5 +54,3 @@ const UsersList = ({ setIsValidRow, usersData, tempUsersData, setTempUsersData }
     </div>
   );
 };
-
-export default UsersList;
