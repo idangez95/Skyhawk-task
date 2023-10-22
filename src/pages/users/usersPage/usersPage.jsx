@@ -2,8 +2,9 @@ import { UsersList } from '../usersList/usersList';
 import PrimaryButton from '../../../components/primaryButton';
 import styles from '../../users/users.module.css';
 import { useUsersPageServices } from './usersPage.services';
+import InputField from '../../../components/inputField';
 
-function UsersPage() {
+export const UsersPage = () => {
   const {
     hasEmptyValues,
     isValidRow,
@@ -31,6 +32,4 @@ function UsersPage() {
       </div>
     </div>
   );
-}
-
-export default UsersPage;
+};

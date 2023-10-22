@@ -1,18 +1,18 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Select, MenuItem, FormControl } from '@mui/material';
 
 const StyledFormControl = styled(FormControl)({
   boxShadow: 'none',
   textTransform: 'none',
   backgroundColor: '#909196',
   borderRadius: '4px',
-  width: '100%',
+  width: '180px',
+  height: '40px'
 });
 
 const StyledSelect = styled(Select)({
   width: '100%',
-  padding: '8px',
   '& .MuiSelect-select': {
     padding: '8px',
   },

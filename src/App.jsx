@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { usersDataState } from './state/atoms/userDataState';
 import initialUsersData from './data/initialUsersData.json';
-import UsersPage from './pages/users/UsersPage/UsersPage';
+import { UsersPage } from './pages/users/UsersPage/UsersPage';
 import { HashLoader } from 'react-spinners';
 
 function App() {
