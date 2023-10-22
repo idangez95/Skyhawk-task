@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/navBar';
-import StatisticsPage from './pages/statistics/StatisticsPage';
+import StatisticsPage from './pages/statistics/statisticsPage';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { usersDataState } from './state/atoms/userDataState';
