@@ -34,8 +34,6 @@ export const UsersList = ({
     setTempUsersData(updatedUsersList);
   };
 
-  console.log(tempUsersData);
-
   const filteredUsers = tempUsersData.filter((user) => {
     const lowerCaseFilterText = filterText.toLowerCase();
     return (

@@ -1,22 +1,24 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/navBar';
-import { StatisticsPage } from './pages/statistics/statisticsPage';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { usersDataState } from './state/atoms/userDataState';
-import initialUsersData from './data/initialUsersData.json';
 import { UsersPage } from './pages/users/UsersPage/UsersPage';
 import { HashLoader } from 'react-spinners';
+import initialUsersData from './data/initialUsersData.json';
+import { StatisticsPage } from './pages/statistics/StatisticsPage';
 
 function App() {
   const [userData, setUsersData] = useRecoilState(usersDataState);
 
   useEffect(() => {
-    const loadData = async () => {
+    const storedData = localStorage.getItem('user_data');
+    if (storedData) {
+      setUsersData(JSON.parse(storedData));
+    } else {
       setUsersData(initialUsersData);
-    };
-    loadData();
-  }, [setUsersData]);
+    }
+  }, []);
 
   return (
     <BrowserRouter>
