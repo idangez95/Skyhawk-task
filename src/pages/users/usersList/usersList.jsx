@@ -11,6 +11,7 @@ export const UsersList = ({
   usersData,
   tempUsersData,
   setTempUsersData,
+  setUsersData,
 }) => {
   const [filterText, setFilterText] = useState('');
 
@@ -31,6 +32,7 @@ export const UsersList = ({
   const deleteUser = (id) => {
     const updatedUsersList = tempUsersData.filter((user) => user.id !== id);
     setTempUsersData(updatedUsersList);
+    setUsersData(updatedUsersList);
   };
 
   const filteredUsers = tempUsersData.filter((user) => {
