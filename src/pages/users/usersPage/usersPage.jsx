@@ -13,12 +13,14 @@ export const UsersPage = () => {
     usersData,
     tempUsersData,
     setTempUsersData,
+    setUsersData,
   } = useUsersPageServices();
 
   return (
     <div className={styles.pageRoot}>
       <div className={styles.pageContentContainer}>
         <UsersList
+          setUsersData={setUsersData}
           setIsValidRow={setIsValidRow}
           usersData={usersData}
           tempUsersData={tempUsersData}
