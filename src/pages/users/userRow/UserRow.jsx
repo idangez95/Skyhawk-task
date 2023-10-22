@@ -6,7 +6,7 @@ import TrashIconButton from '../../../components/trashIconButton';
 import styles from '../users.module.css';
 import SelectField from '../../../components/selectField';
 import countryOptions from '../../../data/countries.json';
-import { useUserRowServices } from './UserRow.services';
+import { useUserRowServices } from './userRow.services';
 
 const UserRow = ({
   user,
