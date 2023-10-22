@@ -22,6 +22,7 @@ export const StatisticsPage = () => {
                 text: 'Legends',
               },
             },
+            responsive: true,
           }}
         />
       </div>
