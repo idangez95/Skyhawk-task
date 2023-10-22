@@ -7,7 +7,7 @@ import { errorsState } from '../../../state/atoms/errorsState';
 import { v4 as uuidv4 } from 'uuid';
 import { ErrorsCounter } from '../errorsCounter/ErrorsCounter';
 
-function UsersList({ setIsValidRow, usersData, tempUsersData, setTempUsersData }) {
+const UsersList = ({ setIsValidRow, usersData, tempUsersData, setTempUsersData }) => {
   const [errorsCounter, setErrorsCounter] = useRecoilState(errorsState);
 
   const addNewUser = () => {
@@ -53,6 +53,6 @@ function UsersList({ setIsValidRow, usersData, tempUsersData, setTempUsersData }
       <ErrorsCounter errors={errorsCounter} />
     </div>
   );
-}
+};
 
 export default UsersList;

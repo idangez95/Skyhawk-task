@@ -6,6 +6,7 @@ import InputField from '../../../components/InputField';
 import TrashIconButton from '../../../components/TrashIconButton';
 import styles from '../users.module.css';
 import countryOptions from '../../../data/countries.json';
+import SelectField from '../../../components/SelectField';
 
 const validateName = (name) => /^[a-zA-Z\s]*$/.test(name) && name.trim() !== '';
 const validateCountry = (country) => countryOptions.includes(country);
@@ -69,7 +70,7 @@ const UserRow = ({
         error={!!errors.name}
       />
 
-      <InputField
+      <SelectField
         name="country"
         placeholder="Country"
         value={values.country}
@@ -79,6 +80,7 @@ const UserRow = ({
         }}
         onBlur={handleBlur}
         error={!!errors.country}
+        options={countryOptions}
       />
 
       <InputField
