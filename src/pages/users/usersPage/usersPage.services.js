@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { usersDataState } from "../../../state/atoms/userDataState";
 import { useRecoilState } from "recoil";
-import { useRef } from "react";
 
 export const useUsersPageServices = () => {
     const [isValidRow, setIsValidRow] = useState(false);

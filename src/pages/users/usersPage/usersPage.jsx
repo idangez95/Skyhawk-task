@@ -1,8 +1,8 @@
 import { UsersList } from '../usersList/usersList';
-import PrimaryButton from '../../../components/primaryButton';
+import { PrimaryButton } from '../../../components/primaryButton';
 import styles from '../../users/users.module.css';
 import { useUsersPageServices } from './usersPage.services';
-import InputField from '../../../components/inputField';
+import { ErrorsCounter } from '../errorsCounter/errorsCounter';
 
 export const UsersPage = () => {
   const {
@@ -25,6 +25,7 @@ export const UsersPage = () => {
           setTempUsersData={setTempUsersData}
         />
         <div className={styles.rightButtonContainer}>
+          <ErrorsCounter tempUsersData={tempUsersData} />
           <PrimaryButton disabled={!isValidRow || hasEmptyValues} handleClick={saveUsers}>
             Save
           </PrimaryButton>

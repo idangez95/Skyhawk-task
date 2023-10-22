@@ -1,10 +1,9 @@
 import { Typography } from '@mui/material';
 import UserRow from '../userRow/userRow';
-import AddButton from '../../../components/addButton';
+import { AddButton } from '../../../components/addButton';
 import styles from '../users.module.css';
-import { ErrorsCounter } from '../errorsCounter/errorsCounter';
 import { v4 as uuidv4 } from 'uuid';
-import InputField from '../../../components/inputField';
+import { InputField } from '../../../components/inputField';
 import { useState } from 'react';
 
 export const UsersList = ({
@@ -49,14 +48,12 @@ export const UsersList = ({
       <div className={styles.usersListHeader}>
         <Typography variant="h6">Users List ({usersData.length})</Typography>
         <div className={styles.searchAndAddButton}>
-          {/* <div style={{ marginLeft: '400px' }}> */}
           <InputField
             type="text"
             placeholder="Filter users by name"
             value={filterText}
             onChange={(e) => setFilterText(e.target.value)}
           />
-          {/* </div> */}
           <AddButton handleClick={addNewUser} />
         </div>
       </div>
@@ -72,7 +69,6 @@ export const UsersList = ({
           />
         ))}
       </div>
-      <ErrorsCounter tempUsersData={tempUsersData} />
     </div>
   );
 };

@@ -11,18 +11,24 @@ export const StatisticsPage = () => {
 
   return (
     <div className={styles.pageRoot}>
-      <h2 className={styles.pageHeader}>Countries Pie Chart</h2>
-      <div style={{ width: 800, height: 800 }}>
+      <h1 className={styles.pageHeader}>Countries Pie Chart</h1>
+      <div className={styles.chart}>
         <Pie
           data={chartData}
           options={{
             plugins: {
-              title: {
+              legend: {
                 display: true,
-                text: 'Legends',
+                position: 'bottom',
+                labels: {
+                  padding: 50,
+                  color: '#fff',
+                  font: {
+                    size: 20,
+                  },
+                },
               },
             },
-            responsive: true,
           }}
         />
       </div>

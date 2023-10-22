@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Box, Button } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
-function NavBar() {
+export const NavBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -26,5 +26,3 @@ function NavBar() {
     </Box>
   );
 }
-
-export default NavBar;

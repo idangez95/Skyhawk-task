@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { Grid } from '@mui/material';
 import { useFormik } from 'formik';
-import InputField from '../../../components/inputField';
-import TrashIconButton from '../../../components/trashIconButton';
+import { InputField } from '../../../components/inputField';
+import { TrashIconButton } from '../../../components/trashIconButton';
 import styles from '../users.module.css';
-import SelectField from '../../../components/selectField';
+import { SelectField } from '../../../components/selectField';
 import countryOptions from '../../../data/countries.json';
 import { useUserRowServices } from './userRow.services';
 
