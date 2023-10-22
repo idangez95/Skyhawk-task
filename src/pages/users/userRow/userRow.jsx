@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { Grid } from '@mui/material';
 import { useFormik } from 'formik';
 import InputField from '../../../components/inputField';
@@ -16,22 +16,28 @@ const UserRow = ({
   setIsValidRow,
 }) => {
   const { validationSchema } = useUserRowServices();
-  const [localUser, setLocalUser] = useState(user);
 
-  const handleInputChange = (field, value) => {
-    const updatedUser = { ...localUser, [field]: value };
-    setLocalUser(updatedUser);
-
-    const updatedTempUsersData = tempUsersData.map((tempUser) =>
-      tempUser.id === localUser.id ? updatedUser : tempUser
-    );
-    setTempUsersData(updatedTempUsersData);
-  };
-
-  const { errors, values, handleChange, handleBlur, isValid } = useFormik({
-    initialValues: localUser,
+  const { errors, handleChange, handleBlur, isValid, values } = useFormik({
+    initialValues: user,
     validationSchema: validationSchema,
   });
+
+  const updatedUser = useMemo(() => ({ ...user, ...values, errors }), [values, errors]);
+
+  const updatedTempUsersData = useMemo(
+    () =>
+      tempUsersData.map((tempUser) => (tempUser.id === user.id ? updatedUser : tempUser)),
+    [values, errors]
+  );
+
+  const updateTempUsersData = useCallback(
+    () => setTempUsersData(updatedTempUsersData),
+    [values, errors]
+  );
+
+  useEffect(() => {
+    updateTempUsersData();
+  }, [values, errors]);
 
   useEffect(() => {
     setIsValidRow(isValid);
@@ -43,10 +49,7 @@ const UserRow = ({
         name="name"
         placeholder="Name"
         value={values.name}
-        onChange={(e) => {
-          handleChange(e);
-          handleInputChange(e.target.name, e.target.value);
-        }}
+        onChange={handleChange}
         onBlur={handleBlur}
         error={!!errors.name}
       />
@@ -55,10 +58,7 @@ const UserRow = ({
         name="country"
         placeholder="Country"
         value={values.country}
-        onChange={(e) => {
-          handleChange(e);
-          handleInputChange(e.target.name, e.target.value);
-        }}
+        onChange={handleChange}
         onBlur={handleBlur}
         error={!!errors.country}
         options={countryOptions}
@@ -68,10 +68,7 @@ const UserRow = ({
         name="email"
         placeholder="Email"
         value={values.email}
-        onChange={(e) => {
-          handleChange(e);
-          handleInputChange(e.target.name, e.target.value);
-        }}
+        onChange={handleChange}
         onBlur={handleBlur}
         error={!!errors.email}
       />
@@ -80,10 +77,7 @@ const UserRow = ({
         name="phone"
         placeholder="Phone"
         value={values.phone}
-        onChange={(e) => {
-          handleChange(e);
-          handleInputChange(e.target.name, e.target.value);
-        }}
+        onChange={handleChange}
         onBlur={handleBlur}
         error={!!errors.phone}
       />
@@ -93,4 +87,4 @@ const UserRow = ({
   );
 };
 
-export default UserRow;
+export default React.memo(UserRow);
