@@ -6,36 +6,12 @@ import { Pie } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import { useState, useEffect } from 'react';
 import { generateRandomColors, quantifyPeopleByCountry } from './utils'; // Import utility functions from utils.js
+import { useStatisticsPageServices } from './statisticsPage.services';
 
 Chart.register(CategoryScale);
 
 const StatisticsPage = () => {
-  const usersData = useRecoilValue(usersDataState);
-  const [chartData, setChartData] = useState({
-    datasets: [
-      {
-        label: 'Countries Pie Chart',
-        borderColor: 'black',
-        borderWidth: 2,
-      },
-    ],
-  });
-
-  useEffect(() => {
-    setChartData({
-      ...chartData,
-      labels: [...new Set(usersData.map((user) => user.country))],
-      datasets: [
-        {
-          ...chartData.datasets[0],
-          data: Object.values(quantifyPeopleByCountry(usersData)),
-          backgroundColor: generateRandomColors(
-            Object.values(quantifyPeopleByCountry(usersData)).length
-          ),
-        },
-      ],
-    });
-  }, [usersData]);
+  const { chartData } = useStatisticsPageServices();
 
   return (
     <div className={styles.pageRoot}>
