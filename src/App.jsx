@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import StatisticsPage from './pages/statistics/StatisticsPage';
-import UsersPage from './pages/users/UsersPage';
+import NavBar from './components/navBar';
+import StatisticsPage from './pages/statistics/statisticsPage';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { usersDataState } from './state/atoms/userDataState';
 import initialUsersData from './data/initialUsersData.json';
+import UsersPage from './pages/users/UsersPage/UsersPage';
 
 function App() {
   const setUsersData = useSetRecoilState(usersDataState);

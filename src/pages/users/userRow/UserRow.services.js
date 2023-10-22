@@ -1,32 +1,23 @@
-import { useCallback, useState } from "react";
-import countryOptions from '../../../data/countries.json';
+import * as Yup from 'yup';
+import { validateCountry, validateEmail, validateName, validatePhone } from './Utils';
 
-export const useUserRowServices = ({ user, onDeleteUser }) => {
-    const [localUser, setLocalUser] = useState(user);
-    console.log({ localUser })
-
-    const handleInputChange = (field, value) => {
-        const updatedUser = { ...localUser, [field]: value };
-        setLocalUser(updatedUser);
-    };
-
-    const validateName = useCallback((name) => /^[a-zA-Z\s]*$/.test(name), [setLocalUser]);
-    console.log(localUser?.name);
-    console.log(validateName(localUser.name));
-
-    const validateCountry = (country) => {
-        return countryOptions.includes(country);
-    };
-
-    const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const validatePhone = (phone) => /^(\+\d{1,3})$/.test(phone);
+export const useUserRowServices = () => {
+    const validationSchema = Yup.object().shape({
+        name: Yup.string()
+            .test('name', 'Invalid name', validateName)
+            .required('Name is required'),
+        country: Yup.string()
+            .test('country', 'Invalid country', validateCountry)
+            .required('Country is required'),
+        email: Yup.string()
+            .test('email', 'Invalid email', validateEmail)
+            .required('Email is required'),
+        phone: Yup.string()
+            .test('phone', 'Invalid phone', validatePhone)
+            .required('Phone is required'),
+    });
 
     return {
-        localUser,
-        handleInputChange,
-        validateName,
-        validateCountry,
-        validateEmail,
-        validatePhone
+        validationSchema
     }
 }

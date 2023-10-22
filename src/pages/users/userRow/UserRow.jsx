@@ -1,32 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import InputField from '../../../components/InputField';
-import TrashIconButton from '../../../components/TrashIconButton';
+import InputField from '../../../components/inputField';
+import TrashIconButton from '../../../components/trashIconButton';
 import styles from '../users.module.css';
+import SelectField from '../../../components/selectField';
 import countryOptions from '../../../data/countries.json';
-import SelectField from '../../../components/SelectField';
-
-const validateName = (name) => /^[a-zA-Z\s]*$/.test(name) && name.trim() !== '';
-const validateCountry = (country) => countryOptions.includes(country);
-const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-const validatePhone = (phone) => /^\+[0-9]*$/.test(phone);
-
-const validationSchema = Yup.object().shape({
-  name: Yup.string()
-    .test('name', 'Invalid name', validateName)
-    .required('Name is required'),
-  country: Yup.string()
-    .test('country', 'Invalid country', validateCountry)
-    .required('Country is required'),
-  email: Yup.string()
-    .test('email', 'Invalid email', validateEmail)
-    .required('Email is required'),
-  phone: Yup.string()
-    .test('phone', 'Invalid phone', validatePhone)
-    .required('Phone is required'),
-});
+import { useUserRowServices } from './UserRow.services';
 
 const UserRow = ({
   user,
@@ -35,6 +15,7 @@ const UserRow = ({
   onDeleteUser,
   setIsValidRow,
 }) => {
+  const { validationSchema } = useUserRowServices();
   const [localUser, setLocalUser] = useState(user);
 
   const handleInputChange = (field, value) => {

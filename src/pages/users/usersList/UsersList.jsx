@@ -1,11 +1,11 @@
 import { Typography } from '@mui/material';
 import UserRow from '../userRow/UserRow';
-import AddButton from '../../../components/AddButton';
+import AddButton from '../../../components/addButton';
 import styles from '../users.module.css';
+import { ErrorsCounter } from '../errorsCounter/errorsCounter';
+import { v4 as uuidv4 } from 'uuid';
 import { useRecoilState } from 'recoil';
 import { errorsState } from '../../../state/atoms/errorsState';
-import { v4 as uuidv4 } from 'uuid';
-import { ErrorsCounter } from '../errorsCounter/ErrorsCounter';
 
 const UsersList = ({ setIsValidRow, usersData, tempUsersData, setTempUsersData }) => {
   const [errorsCounter, setErrorsCounter] = useRecoilState(errorsState);
