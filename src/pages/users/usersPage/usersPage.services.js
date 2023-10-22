@@ -1,17 +1,22 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usersDataState } from "../../../state/atoms/userDataState";
 import { useRecoilState } from "recoil";
-
+import { useRef } from "react";
 
 export const useUsersPageServices = () => {
     const [isValidRow, setIsValidRow] = useState(false);
     const [usersData, setUsersData] = useRecoilState(usersDataState);
-    const [tempUsersData, setTempUsersData] = useState(usersData);
 
-    const hasEmptyValues = useMemo(
-        () => tempUsersData.some((user) => Object.values(user).some((value) => value === '')),
-        [tempUsersData]
+    const initialTempUsersData = JSON.parse(localStorage.getItem('user_data')) || usersData;
+    const [tempUsersData, setTempUsersData] = useState(initialTempUsersData);
+
+    const hasEmptyValues = tempUsersData.some((user) =>
+        Object.values(user).some((value) => value === "")
     );
+
+    useEffect(() => {
+        localStorage.setItem('user_data', JSON.stringify(tempUsersData));
+    }, [tempUsersData]);
 
     const saveUsers = () => {
         setUsersData(tempUsersData);
