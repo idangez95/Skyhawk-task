@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import UserRow from '../userRow/userRow';
+import UserRow from '../userRow/UserRow';
 import AddButton from '../../../components/addButton';
 import styles from '../users.module.css';
 import { ErrorsCounter } from '../errorsCounter/errorsCounter';
